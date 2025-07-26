@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 public class PlayerAttack : MonoBehaviour
 {
+    [HideInInspector] public float health = 200f;
     private Vector2 originalPos;
-    private float moveSpeed = 5f;
+    private float moveSpeed = 9f;
     private GameManager GM;
     // Start is called before the first frame update
     void Start()
@@ -25,12 +27,17 @@ public class PlayerAttack : MonoBehaviour
 
             if (hit.collider != null && hit.collider.CompareTag("Enemy"))
             {
-                StartCoroutine(MoveToEnemyandBack(hit.collider.transform.position));
+                GameObject enemyTarget = hit.collider.gameObject;
+                EnemyStatus enemyStatus = enemyTarget.GetComponent<EnemyStatus>();
 
+
+                StartCoroutine(MoveToEnemyandBack(hit.collider.transform.position, enemyStatus));
+                
                 Debug.Log(hit.collider.name + " GameObject");
             }
-            
+
         }
+        Debug.Log(health);
     }
 
     IEnumerator MoveToPos(Vector2 target)
@@ -44,11 +51,12 @@ public class PlayerAttack : MonoBehaviour
         //isMoving = false;
     }
 
-    IEnumerator MoveToEnemyandBack(Vector2 enemyPos)
+    IEnumerator MoveToEnemyandBack(Vector2 enemyPos, EnemyStatus enemyStatus)
     {
         yield return StartCoroutine(MoveToPos(enemyPos));
-
-        yield return new WaitForSeconds(2f);
+        enemyStatus.CurrentHealth -= 25f;
+        Debug.Log(enemyStatus.CurrentHealth + " darah musuh");
+        yield return new WaitForSeconds(1f);
 
         yield return StartCoroutine(MoveToPos(originalPos));
         GM.turn = "Enemy";

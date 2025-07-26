@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
+    [HideInInspector] public float health = 50f;
     public GameObject[] enemy;
     private GameObject Player;
-    private float moveSpeed = 5f;
+    private float moveSpeed = 9f;
     private GameManager GM;
     private bool isMoving = false;
+    private PlayerAttack PA;
     // Start is called before the first frame update
     void Start()
     {
         Player = GameObject.FindWithTag("Player");
         GM = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+        PA = GameObject.FindWithTag("Player").GetComponent<PlayerAttack>();
     }
 
     // Update is called once per frame
@@ -52,8 +55,8 @@ public class EnemyAttack : MonoBehaviour
 
         Vector2 enemyBack = (Vector2)enemyPos + new Vector2(0.3f, 0);
         yield return StartCoroutine(MoveToPos(playerPos, enemyChose));
-
-        yield return new WaitForSeconds(2f);
+        PA.health -= 10f;
+        yield return new WaitForSeconds(1f);
 
         yield return StartCoroutine(MoveToPos(enemyBack, enemyChose));
         GM.turn = "Player";
