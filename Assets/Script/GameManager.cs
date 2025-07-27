@@ -11,11 +11,15 @@ public class GameManager : MonoBehaviour
     public String turn = "Player";
     private PlayerAttack PA;
     public Image fillSliderPlayer;
+    public GameObject SliderEnemyPrefabs;
+    public Transform ParentCanva;
+    private EnemyStatus ES;
     // Start is called before the first frame update
     void Start()
     {
         PA = GameObject.FindWithTag("Player").GetComponent<PlayerAttack>();
         HealthSliderPlayer.gameObject.SetActive(false);
+        ES = GameObject.FindWithTag("Enemy").GetComponent<EnemyStatus>();
     }
 
     // Update is called once per frame
@@ -39,6 +43,22 @@ public class GameManager : MonoBehaviour
         {
             fillSliderPlayer.enabled = true;
         }
+    }
+
+    public void SpawnEnemySlider(Vector3 enemy, Transform TargetPos)
+    {
+        GameObject sliderEnemy = Instantiate(SliderEnemyPrefabs, enemy, Quaternion.identity, ParentCanva);
+        Transform handler = sliderEnemy.transform.Find("Handle Slide Area");
+        EnemySlider enemySlider = sliderEnemy.AddComponent<EnemySlider>();
+
+        Slider EnemySlider = sliderEnemy.GetComponent<Slider>();
+        //EnemySlider.onValueChanged.AddListener(ES.EnemyHealth);
+        //EnemySlider.value = ES.CurrentHealth;
+        EnemySlider.maxValue = ES.CurrentHealth;
+
+        enemySlider.enemyPos = TargetPos;
+        handler.gameObject.SetActive(false);
+
     }
 
 

@@ -9,6 +9,7 @@ public class PlayerAttack : MonoBehaviour
     private Vector2 originalPos;
     private float moveSpeed = 9f;
     private GameManager GM;
+    public Transform PosEnemy;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,10 +29,11 @@ public class PlayerAttack : MonoBehaviour
             if (hit.collider != null && hit.collider.CompareTag("Enemy"))
             {
                 GameObject enemyTarget = hit.collider.gameObject;
+                PosEnemy = hit.collider.transform;
                 EnemyStatus enemyStatus = enemyTarget.GetComponent<EnemyStatus>();
 
 
-                StartCoroutine(MoveToEnemyandBack(hit.collider.transform.position, enemyStatus));
+                StartCoroutine(MoveToEnemyandBack(PosEnemy.position, enemyStatus));
                 
                 Debug.Log(hit.collider.name + " GameObject");
             }
@@ -54,6 +56,7 @@ public class PlayerAttack : MonoBehaviour
     IEnumerator MoveToEnemyandBack(Vector2 enemyPos, EnemyStatus enemyStatus)
     {
         yield return StartCoroutine(MoveToPos(enemyPos));
+        GM.SpawnEnemySlider(enemyPos + new Vector2(0, 0.5f), PosEnemy);
         enemyStatus.CurrentHealth -= 25f;
         Debug.Log(enemyStatus.CurrentHealth + " darah musuh");
         yield return new WaitForSeconds(1f);

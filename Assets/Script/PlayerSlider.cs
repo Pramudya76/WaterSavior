@@ -16,6 +16,6 @@ public class PlayerSlider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Player.position + new Vector3(0, 1, 0);
+        transform.position = Player.position + new Vector3(0, 0.7f, 0);
     }
 }

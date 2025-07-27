@@ -197,6 +197,8 @@ MonoBehaviour:
   HealthSliderPlayer: {fileID: 1954861151}
   turn: Player
   fillSliderPlayer: {fileID: 752742755}
+  SliderEnemyPrefabs: {fileID: 1913253326411495218, guid: 20efbbba89e9cd240a90747a08868d49, type: 3}
+  ParentCanva: {fileID: 1708253681}
 --- !u!4 &326064707
 Transform:
   m_ObjectHideFlags: 0
@@ -698,6 +700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 200
+  PosEnemy: {fileID: 0}
 --- !u!1 &554080328
 GameObject:
   m_ObjectHideFlags: 0
@@ -4935,7 +4938,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 200
   m_WholeNumbers: 0
-  m_Value: 200
+  m_Value: 130
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:

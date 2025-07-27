@@ -18,6 +18,12 @@ public class EnemyStatus : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
+
+    public void EnemyHealth(float value)
+    {
+        CurrentHealth = value;
+    }
+
 }
