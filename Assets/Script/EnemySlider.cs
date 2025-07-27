@@ -13,9 +13,12 @@ public class EnemySlider : MonoBehaviour
     {
         //PA = GameObject.FindWithTag("Player").GetComponent<PlayerAttack>();
         sliderEnemy = GetComponent<Slider>();
-        ES = GameObject.FindWithTag("Enemy").GetComponent<EnemyStatus>();
+        //ES = GameObject.FindWithTag("Enemy").GetComponent<EnemyStatus>();
     }
-
+    public void setSlider(EnemyStatus enemyStatus)
+    {
+        ES = enemyStatus;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -26,10 +29,14 @@ public class EnemySlider : MonoBehaviour
         if (sliderEnemy.value <= 0)
         {
             fill.enabled = false;
+            Destroy(gameObject);
         }
         else
         {
             fill.enabled = true;
         }
     }
+
+    
+
 }

@@ -10,12 +10,15 @@ public class PlayerAttack : MonoBehaviour
     private float moveSpeed = 9f;
     private GameManager GM;
     public Transform PosEnemy;
+    private SpriteRenderer spriteRenderer;
+    private float dissolveAmount = 0;
     // Start is called before the first frame update
     void Start()
     {
         GM = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         //enemy = GameObject.FindWithTag("Enemy");
         originalPos = transform.position;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -34,12 +37,18 @@ public class PlayerAttack : MonoBehaviour
 
 
                 StartCoroutine(MoveToEnemyandBack(PosEnemy.position, enemyStatus));
-                
+
                 Debug.Log(hit.collider.name + " GameObject");
             }
 
         }
         Debug.Log(health);
+
+        if (health <= 0)
+        {
+            StartCoroutine(CDBeforeDie());
+        }
+
     }
 
     IEnumerator MoveToPos(Vector2 target)
@@ -63,6 +72,16 @@ public class PlayerAttack : MonoBehaviour
 
         yield return StartCoroutine(MoveToPos(originalPos));
         GM.turn = "Enemy";
+    }
+
+    IEnumerator CDBeforeDie()
+    {
+        dissolveAmount += Time.deltaTime;
+        dissolveAmount = Mathf.Clamp(dissolveAmount, 0, 1.1f);
+        spriteRenderer.material.SetFloat("_DissolveAmount", dissolveAmount);
+        yield return new WaitForSeconds(1f);
+        //Destroy(gameObject);
+        
     }
 
 

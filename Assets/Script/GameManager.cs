@@ -14,12 +14,14 @@ public class GameManager : MonoBehaviour
     public GameObject SliderEnemyPrefabs;
     public Transform ParentCanva;
     private EnemyStatus ES;
+    public GameObject gameOverPanel;
     // Start is called before the first frame update
     void Start()
     {
         PA = GameObject.FindWithTag("Player").GetComponent<PlayerAttack>();
         HealthSliderPlayer.gameObject.SetActive(false);
-        ES = GameObject.FindWithTag("Enemy").GetComponent<EnemyStatus>();
+        gameOverPanel.gameObject.SetActive(false);
+        //ES = GameObject.FindWithTag("Enemy").GetComponent<EnemyStatus>();
     }
 
     // Update is called once per frame
@@ -49,9 +51,13 @@ public class GameManager : MonoBehaviour
     {
         GameObject sliderEnemy = Instantiate(SliderEnemyPrefabs, enemy, Quaternion.identity, ParentCanva);
         Transform handler = sliderEnemy.transform.Find("Handle Slide Area");
+        ES = TargetPos.GetComponent<EnemyStatus>();
         EnemySlider enemySlider = sliderEnemy.AddComponent<EnemySlider>();
 
+
+
         Slider EnemySlider = sliderEnemy.GetComponent<Slider>();
+        enemySlider.setSlider(ES);
         //EnemySlider.onValueChanged.AddListener(ES.EnemyHealth);
         //EnemySlider.value = ES.CurrentHealth;
         EnemySlider.maxValue = ES.CurrentHealth;
@@ -59,6 +65,11 @@ public class GameManager : MonoBehaviour
         enemySlider.enemyPos = TargetPos;
         handler.gameObject.SetActive(false);
 
+    }
+
+    public void gameOver()
+    {
+        gameOverPanel.gameObject.SetActive(true);
     }
 
 

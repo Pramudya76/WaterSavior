@@ -47,8 +47,16 @@ public class EnemyAttack : MonoBehaviour
 
     IEnumerator MoveAndBack()
     {
-        int angkaRandom = Random.Range(0, enemy.Length);
-        GameObject enemyChose = enemy[angkaRandom];
+        List<GameObject> aliveEnemies = new List<GameObject>();
+        foreach (GameObject e in enemy)
+        {
+            if (e != null)
+            {
+                aliveEnemies.Add(e);
+            }
+        }
+        int angkaRandom = Random.Range(0, aliveEnemies.Count);
+        GameObject enemyChose = aliveEnemies[angkaRandom];
         Vector2 enemyPos = enemyChose.transform.position;
 
         Vector2 playerPos = (Vector2)Player.transform.position + new Vector2(1, 0);
