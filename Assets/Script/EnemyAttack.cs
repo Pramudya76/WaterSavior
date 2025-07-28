@@ -17,6 +17,8 @@ public class EnemyAttack : MonoBehaviour
         Player = GameObject.FindWithTag("Player");
         GM = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         PA = GameObject.FindWithTag("Player").GetComponent<PlayerAttack>();
+        GM.SpawnEnemy();
+        enemy = GameObject.FindGameObjectsWithTag("Enemy");
     }
 
     // Update is called once per frame

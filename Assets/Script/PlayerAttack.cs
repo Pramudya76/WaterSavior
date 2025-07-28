@@ -5,11 +5,11 @@ using UnityEngine.Assertions.Must;
 
 public class PlayerAttack : MonoBehaviour
 {
-    [HideInInspector] public float health = 200f;
+    public float health = 200f;
     private Vector2 originalPos;
     private float moveSpeed = 9f;
     private GameManager GM;
-    public Transform PosEnemy;
+    [HideInInspector] public Transform PosEnemy;
     private SpriteRenderer spriteRenderer;
     private float dissolveAmount = 0;
     // Start is called before the first frame update
@@ -80,8 +80,9 @@ public class PlayerAttack : MonoBehaviour
         dissolveAmount = Mathf.Clamp(dissolveAmount, 0, 1.1f);
         spriteRenderer.material.SetFloat("_DissolveAmount", dissolveAmount);
         yield return new WaitForSeconds(1f);
+        GM.gameOver();
         //Destroy(gameObject);
-        
+
     }
 
 

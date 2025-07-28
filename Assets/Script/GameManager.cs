@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -15,12 +16,17 @@ public class GameManager : MonoBehaviour
     public Transform ParentCanva;
     private EnemyStatus ES;
     public GameObject gameOverPanel;
+    public GameObject[] enemy;
+    public Transform[] enemySpawnPos;
+    private int jumlahEnemy = 4;
     // Start is called before the first frame update
     void Start()
     {
         PA = GameObject.FindWithTag("Player").GetComponent<PlayerAttack>();
         HealthSliderPlayer.gameObject.SetActive(false);
         gameOverPanel.gameObject.SetActive(false);
+        //enemySpawnPos = new Vector3()
+        Time.timeScale = 1;
         //ES = GameObject.FindWithTag("Enemy").GetComponent<EnemyStatus>();
     }
 
@@ -67,9 +73,37 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void SpawnEnemy()
+    {
+        List<Transform> enemySpawn = new List<Transform>(enemySpawnPos);
+        // foreach (Transform pos in enemySpawnPos)
+        // {
+        //     if (pos == null) continue;
+        //     int enemySpawnRandom = UnityEngine.Random.Range(0, enemy.Length);
+        //     int enemySpawnLocation = UnityEngine.Random.Range(0, enemySpawn.Count);
+        //     GameObject enemyPrefabs = Instantiate(enemy[enemySpawnRandom], pos.position, Quaternion.identity);
+
+        // }
+
+        for (int a = 0; a < jumlahEnemy; a++)
+        {
+            int enemySpawnRandom = UnityEngine.Random.Range(0, enemy.Length);
+            int enemySpawnLocation = UnityEngine.Random.Range(0, enemySpawn.Count);
+            GameObject enemyPrefabs = Instantiate(enemy[enemySpawnRandom], enemySpawn[a].position, Quaternion.identity);
+        }
+        
+        //enemySpawn.RemoveAt(enemySpawnLocation);
+    }
+
     public void gameOver()
     {
         gameOverPanel.gameObject.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void BackToPlayAgain()
+    {
+        SceneManager.LoadScene("BattleArea");
     }
 
 
