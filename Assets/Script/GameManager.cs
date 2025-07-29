@@ -18,7 +18,8 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverPanel;
     public GameObject[] enemy;
     public Transform[] enemySpawnPos;
-    
+    private WaterManager WM;
+    public GameObject WinGamePanel;
     //private PurifyWater PW;
     // Start is called before the first frame update
     void Start()
@@ -26,6 +27,8 @@ public class GameManager : MonoBehaviour
         PA = GameObject.FindWithTag("Player").GetComponent<PlayerAttack>();
         HealthSliderPlayer.gameObject.SetActive(false);
         gameOverPanel.gameObject.SetActive(false);
+        WinGamePanel.gameObject.SetActive(false);
+        WM = GameObject.FindWithTag("WaterManager").GetComponent<WaterManager>();
         //PW = GameObject.FindWithTag("DirtWater").GetComponent<PurifyWater>();
         //enemySpawnPos = new Vector3()
         Time.timeScale = 1;
@@ -40,6 +43,12 @@ public class GameManager : MonoBehaviour
             HealthSliderPlayer.gameObject.SetActive(true);
         }
         healthPlayerValue();
+        GameObject enemyObjt = GameObject.FindWithTag("Enemy");
+        if (enemyObjt == null)
+        {
+            StartCoroutine(WinGame());
+        }
+
     }
 
     public void healthPlayerValue()
@@ -93,7 +102,7 @@ public class GameManager : MonoBehaviour
             int enemySpawnLocation = UnityEngine.Random.Range(0, enemySpawn.Count);
             GameObject enemyPrefabs = Instantiate(enemy[enemySpawnRandom], enemySpawn[a].position, Quaternion.identity);
         }
-        
+
         //enemySpawn.RemoveAt(enemySpawnLocation);
     }
 
@@ -106,6 +115,15 @@ public class GameManager : MonoBehaviour
     public void BackToPlayAgain()
     {
         SceneManager.LoadScene("BattleArea");
+    }
+
+    IEnumerator WinGame()
+    {
+        WinGamePanel.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        PlayerPrefs.SetInt(WM.WaterName, 1);
+        PlayerPrefs.Save();
+        SceneManager.LoadScene("Outdoor");
     }
 
 
