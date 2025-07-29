@@ -18,13 +18,15 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverPanel;
     public GameObject[] enemy;
     public Transform[] enemySpawnPos;
-    private int jumlahEnemy = 4;
+    
+    //private PurifyWater PW;
     // Start is called before the first frame update
     void Start()
     {
         PA = GameObject.FindWithTag("Player").GetComponent<PlayerAttack>();
         HealthSliderPlayer.gameObject.SetActive(false);
         gameOverPanel.gameObject.SetActive(false);
+        //PW = GameObject.FindWithTag("DirtWater").GetComponent<PurifyWater>();
         //enemySpawnPos = new Vector3()
         Time.timeScale = 1;
         //ES = GameObject.FindWithTag("Enemy").GetComponent<EnemyStatus>();
@@ -73,7 +75,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void SpawnEnemy()
+    public void SpawnEnemy(int jumlahEnemy)
     {
         List<Transform> enemySpawn = new List<Transform>(enemySpawnPos);
         // foreach (Transform pos in enemySpawnPos)

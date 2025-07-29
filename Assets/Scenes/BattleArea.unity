@@ -266,6 +266,11 @@ MonoBehaviour:
   - {fileID: 4442404584689083429, guid: 979b6175436d017448c0fc26c99f9b24, type: 3}
   - {fileID: 8824118253121267537, guid: 840ac0300d62c8a4a96beae6aba579ba, type: 3}
   - {fileID: 4742161092246072888, guid: e13fe715347f6a24e806df22c69315f0, type: 3}
+  - {fileID: 4442404584689083429, guid: 4f6ec0ec573d12d449219759e27e95f1, type: 3}
+  - {fileID: 4442404584689083429, guid: f0857aefa1b1fa344bb3938771f13118, type: 3}
+  - {fileID: 4442404584689083429, guid: ab56c9dd2b316ac4a988747aaf01fd04, type: 3}
+  - {fileID: 4442404584689083429, guid: 9d3c63ab3c8a7824da6566d4ccffa23d, type: 3}
+  - {fileID: 4442404584689083429, guid: f794d6b21b6069b43ae9455332aeda3e, type: 3}
   enemySpawnPos:
   - {fileID: 987062587}
   - {fileID: 1168749848}

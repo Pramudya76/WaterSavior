@@ -11,13 +11,15 @@ public class EnemyAttack : MonoBehaviour
     private GameManager GM;
     private bool isMoving = false;
     private PlayerAttack PA;
+    private int jumlahEnemy;
     // Start is called before the first frame update
     void Start()
     {
         Player = GameObject.FindWithTag("Player");
         GM = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         PA = GameObject.FindWithTag("Player").GetComponent<PlayerAttack>();
-        GM.SpawnEnemy();
+        jumlahEnemy = PlayerPrefs.GetInt("JumlahEnemy", 0);
+        GM.SpawnEnemy(jumlahEnemy);
         enemy = GameObject.FindGameObjectsWithTag("Enemy");
     }
 
