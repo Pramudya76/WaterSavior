@@ -34,6 +34,10 @@ public class PurifyWater : MonoBehaviour
             Button.transform.position = PlayerPos.position + new Vector3(0.8f, 0.5f, 0);
             if (Input.GetKeyDown(KeyCode.F))
             {
+                PlayerPrefs.SetFloat("PlayerX_" + SceneManager.GetActiveScene().name, PlayerPos.transform.position.x);
+                PlayerPrefs.SetFloat("PlayerY_" + SceneManager.GetActiveScene().name, PlayerPos.transform.position.y);
+                PlayerPrefs.SetFloat("PlayerZ_" + SceneManager.GetActiveScene().name, PlayerPos.transform.position.z);
+                PlayerPrefs.Save();
                 PlayerPrefs.SetString("CurrentWater", nameWater);
                 PlayerPrefs.Save();
                 PlayerPrefs.SetInt("JumlahEnemy", jumlahEnemy);

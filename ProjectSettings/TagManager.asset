@@ -8,6 +8,7 @@ TagManager:
   - GameManager
   - DirtWater
   - WaterManager
+  - PlayerPosManager
   layers:
   - Default
   - TransparentFX
