@@ -143,7 +143,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      WorldofDream_0: -223531925677760529
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
