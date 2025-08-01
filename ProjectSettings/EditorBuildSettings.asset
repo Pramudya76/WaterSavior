@@ -20,5 +20,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BattleArea.unity
     guid: ab9aa2fb1fd30404099e85d0b12bcb15
+  - enabled: 1
+    path: Assets/Scenes/DreamWorldAfterDone.unity
+    guid: f8de68c1431e4ec41b34d65ca1a06ce8
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
