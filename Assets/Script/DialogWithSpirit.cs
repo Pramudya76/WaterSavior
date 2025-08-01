@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DialogWithSpirit : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class DialogWithSpirit : MonoBehaviour
         "Aku adalah Roh Penjaga Air. Terima kasih telah datang.",
         "Aku... datang? Maksudmu, ini bukan mimpi?",
         "Ini memang dunia mimpi, tapi juga lebih dari sekadar mimpi.",
-        "Aku memanggilmu karena air di dunia kami... telah tercemar.",
+        "Aku memanggilmu karena air... telah tercemar.",
         "Racun dan kotoran merusak sumber kehidupan kami. Kami perlahan melemah.",
         "Tercemar...? Bagaimana bisa?",
         "Dunia manusia mulai lupa pentingnya menjaga alam. Mereka mencemari sungai, danau, bahkan hujan.",
@@ -62,7 +63,7 @@ public class DialogWithSpirit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         Collider2D area = Physics2D.OverlapCircle(transform.position, 4f, layer);
         if (area != null)
         {
@@ -80,11 +81,11 @@ public class DialogWithSpirit : MonoBehaviour
                 StartCoroutine(CDPanel());
                 isButton = true;
             }
-            if (Input.GetKeyDown(KeyCode.Return) && !isTyping) 
+            if (Input.GetKeyDown(KeyCode.Return) && !isTyping)
             {
                 if (index < lineDialog.Length)
                 {
-                    
+
                     StartCoroutine(TypingDialog());
                 }
                 else
@@ -93,7 +94,7 @@ public class DialogWithSpirit : MonoBehaviour
                     DialogPanel.gameObject.SetActive(false);
                     PlayerImageDialog.gameObject.SetActive(false);
                     SpiritImageDialog.gameObject.SetActive(false);
-
+                    StartCoroutine(CDChangeScene());
                 }
             }
         }
@@ -162,6 +163,12 @@ public class DialogWithSpirit : MonoBehaviour
         isTyping = false;
         EnterText.gameObject.SetActive(true);
         index++;
+    }
+
+    IEnumerator CDChangeScene()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene("InsideHouse");
     }
 
 }

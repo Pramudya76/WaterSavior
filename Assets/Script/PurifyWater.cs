@@ -14,15 +14,18 @@ public class PurifyWater : MonoBehaviour
     public int jumlahEnemy;
     public GameObject[] dirtWater;
     public String nameWater;
+    
     // Start is called before the first frame update
     void Start()
     {
+        //PlayerPrefs.DeleteKey("WaterDone");
         if (PlayerPrefs.GetInt(nameWater) == 1)
         {
             for (int a = 0; a < dirtWater.Length; a++)
             {
                 Destroy(dirtWater[a]);
             }
+            Debug.Log("Water Done " + PlayerPrefs.GetInt("WaterDone"));
         }
     }
 

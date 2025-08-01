@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.Unity.VisualStudio.Editor;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PrologDialog : MonoBehaviour
 {
@@ -13,7 +14,6 @@ public class PrologDialog : MonoBehaviour
     public GameObject DialogPanel;
     private bool isTyping = false;
     public GameObject EnterText;
-    private float t = 0.1f;
     public CanvasGroup Dialog;
     // Start is called before the first frame update
     void Start()
@@ -37,6 +37,7 @@ public class PrologDialog : MonoBehaviour
             {
                 StartCoroutine(DialogShowUpOut(1, 0));
                 DialogPanel.gameObject.SetActive(false);
+                StartCoroutine(CDChangeScene());
             }
         }
     }
@@ -75,7 +76,14 @@ public class PrologDialog : MonoBehaviour
             float t = elapsed / duration;
             Dialog.alpha = Mathf.Lerp(Start, target, t);
             DialogPanel.gameObject.SetActive(true);
-            yield return null;  
+            yield return null;
         }
     }
+
+    IEnumerator CDChangeScene()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene("DreamWorld");
+    }
+
 }

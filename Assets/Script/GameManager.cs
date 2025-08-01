@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public Transform[] enemySpawnPos;
     private WaterManager WM;
     public GameObject WinGamePanel;
+    private int indexWaterDone;
     //private PurifyWater PW;
     // Start is called before the first frame update
     void Start()
@@ -29,10 +30,7 @@ public class GameManager : MonoBehaviour
         gameOverPanel.gameObject.SetActive(false);
         WinGamePanel.gameObject.SetActive(false);
         WM = GameObject.FindWithTag("WaterManager").GetComponent<WaterManager>();
-        //PW = GameObject.FindWithTag("DirtWater").GetComponent<PurifyWater>();
-        //enemySpawnPos = new Vector3()
         Time.timeScale = 1;
-        //ES = GameObject.FindWithTag("Enemy").GetComponent<EnemyStatus>();
     }
 
     // Update is called once per frame
@@ -122,6 +120,9 @@ public class GameManager : MonoBehaviour
         WinGamePanel.gameObject.SetActive(true);
         yield return new WaitForSeconds(1.5f);
         PlayerPrefs.SetInt(WM.WaterName, 1);
+        indexWaterDone = PlayerPrefs.GetInt("WaterDone", 2);
+        indexWaterDone += 1;
+        PlayerPrefs.SetInt("WaterDone", indexWaterDone);
         PlayerPrefs.Save();
         SceneManager.LoadScene("Outdoor");
     }
