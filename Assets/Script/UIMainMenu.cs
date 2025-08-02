@@ -7,6 +7,7 @@ public class UIMainMenu : MonoBehaviour
 {
     public GameObject PanelBefore;
     public GameObject PanelAfter;
+    public GameObject SettingLayer;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +31,7 @@ public class UIMainMenu : MonoBehaviour
 
     public void StartGame()
     {
+        PlayerPrefs.DeleteAll();
         PlayerPrefs.SetInt("SaveData", 1);
         PlayerPrefs.Save();
         SceneManager.LoadScene("SleepScene");
@@ -38,9 +40,31 @@ public class UIMainMenu : MonoBehaviour
     public void NewGame()
     {
         PlayerPrefs.DeleteAll();
+        PlayerPrefs.SetInt("SaveData", 1);
         PlayerPrefs.Save();
         SceneManager.LoadScene("SleepScene");
     }
 
+    public void LoadGame()
+    {
+        SceneManager.LoadScene(PlayerPrefs.GetString("CurrentScene"));
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
+    public void VolumeButton()
+    {
+        SettingLayer.gameObject.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void ExitSettingLayer()
+    {
+        SettingLayer.gameObject.SetActive(false);
+        Time.timeScale = 1;
+    }
 
 }

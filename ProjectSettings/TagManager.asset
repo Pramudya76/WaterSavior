@@ -9,6 +9,7 @@ TagManager:
   - DirtWater
   - WaterManager
   - PlayerPosManager
+  - UiManager
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - Water
   - UI
   - player
-  - 
+  - Setting
   - 
   - 
   - 

@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
         WinGamePanel.gameObject.SetActive(true);
         yield return new WaitForSeconds(1.5f);
         PlayerPrefs.SetInt(WM.WaterName, 1);
-        indexWaterDone = PlayerPrefs.GetInt("WaterDone", 2);
+        indexWaterDone = PlayerPrefs.GetInt("WaterDone", 0);
         indexWaterDone += 1;
         PlayerPrefs.SetInt("WaterDone", indexWaterDone);
         PlayerPrefs.Save();

@@ -17,6 +17,17 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         mySpriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (PlayerPrefs.HasKey("SaveGame"))
+        {
+            float x = PlayerPrefs.GetFloat("CurrentPosX");
+            float y = PlayerPrefs.GetFloat("CurrentPosY");
+            float z = PlayerPrefs.GetFloat("CurrentPosZ");
+            transform.position = new Vector3(x, y, z);
+            PlayerPrefs.DeleteKey("SaveGame");
+        }
+
+
     }
 
     // Update is called once per frame
