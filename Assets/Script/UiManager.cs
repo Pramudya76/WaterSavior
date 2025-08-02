@@ -11,11 +11,12 @@ public class UiManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SettingLayer.gameObject.SetActive(false);
         SettingPanel.gameObject.SetActive(false);
         PlayerPos = GameObject.FindWithTag("Player");
-        SettingLayer.gameObject.SetActive(false);
         Time.timeScale = 1;
     }
+    
 
     // Update is called once per frame
     void Update()

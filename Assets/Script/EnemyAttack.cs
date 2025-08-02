@@ -12,12 +12,14 @@ public class EnemyAttack : MonoBehaviour
     private bool isMoving = false;
     private PlayerAttack PA;
     private int jumlahEnemy;
+    private AudioManager AM;
     // Start is called before the first frame update
     void Start()
     {
         Player = GameObject.FindWithTag("Player");
         GM = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         PA = GameObject.FindWithTag("Player").GetComponent<PlayerAttack>();
+        AM = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
         jumlahEnemy = PlayerPrefs.GetInt("JumlahEnemy", 0);
         GM.SpawnEnemy(jumlahEnemy);
         enemy = GameObject.FindGameObjectsWithTag("Enemy");
@@ -68,8 +70,11 @@ public class EnemyAttack : MonoBehaviour
         Vector2 enemyBack = (Vector2)enemyPos + new Vector2(0.3f, 0);
         yield return StartCoroutine(MoveToPos(playerPos, enemyChose));
         PA.health -= 10f;
-        yield return new WaitForSeconds(1f);
-
+        AM.EnemyAttack.Play();
+        AM.PlayerTakeDamage.Play();
+        yield return new WaitForSeconds(0.5f);
+        AM.EnemyAttack.Stop();
+        AM.PlayerTakeDamage.Stop();
         yield return StartCoroutine(MoveToPos(enemyBack, enemyChose));
         GM.turn = "Player";
         isMoving = false;

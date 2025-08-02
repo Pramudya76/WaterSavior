@@ -11,6 +11,7 @@ public class UIMainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SettingLayer.gameObject.SetActive(false);
         if (PlayerPrefs.HasKey("SaveData"))
         {
             PanelAfter.gameObject.SetActive(true);

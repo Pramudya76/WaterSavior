@@ -12,11 +12,12 @@ public class PlayerAttack : MonoBehaviour
     [HideInInspector] public Transform PosEnemy;
     private SpriteRenderer spriteRenderer;
     private float dissolveAmount = 0;
+    private AudioManager AM;
     // Start is called before the first frame update
     void Start()
     {
         GM = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
-        //enemy = GameObject.FindWithTag("Enemy");
+        AM = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
         originalPos = transform.position;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -68,8 +69,11 @@ public class PlayerAttack : MonoBehaviour
         GM.SpawnEnemySlider(enemyPos + new Vector2(0, 0.5f), PosEnemy);
         enemyStatus.CurrentHealth -= 25f;
         Debug.Log(enemyStatus.CurrentHealth + " darah musuh");
-        yield return new WaitForSeconds(1f);
-
+        AM.PlayerAttack.Play();
+        AM.EnemyTakeDamage.Play();
+        yield return new WaitForSeconds(0.5f);
+        AM.PlayerAttack.Stop();
+        AM.EnemyTakeDamage.Stop();
         yield return StartCoroutine(MoveToPos(originalPos));
         GM.turn = "Enemy";
     }

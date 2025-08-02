@@ -10,6 +10,7 @@ TagManager:
   - WaterManager
   - PlayerPosManager
   - UiManager
+  - AudioManager
   layers:
   - Default
   - TransparentFX

@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     private WaterManager WM;
     public GameObject WinGamePanel;
     private int indexWaterDone;
+    private AudioManager AM;
     //private PurifyWater PW;
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
         gameOverPanel.gameObject.SetActive(false);
         WinGamePanel.gameObject.SetActive(false);
         WM = GameObject.FindWithTag("WaterManager").GetComponent<WaterManager>();
+        AM = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
         Time.timeScale = 1;
     }
 
@@ -106,6 +108,7 @@ public class GameManager : MonoBehaviour
 
     public void gameOver()
     {
+        AM.GameOverSound.Play();
         gameOverPanel.gameObject.SetActive(true);
         Time.timeScale = 0;
     }
@@ -118,6 +121,7 @@ public class GameManager : MonoBehaviour
     IEnumerator WinGame()
     {
         WinGamePanel.gameObject.SetActive(true);
+        AM.SuccesSound.Play();
         yield return new WaitForSeconds(1.5f);
         PlayerPrefs.SetInt(WM.WaterName, 1);
         indexWaterDone = PlayerPrefs.GetInt("WaterDone", 0);
