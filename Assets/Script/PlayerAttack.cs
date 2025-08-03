@@ -36,10 +36,7 @@ public class PlayerAttack : MonoBehaviour
                 PosEnemy = hit.collider.transform;
                 EnemyStatus enemyStatus = enemyTarget.GetComponent<EnemyStatus>();
 
-
                 StartCoroutine(MoveToEnemyandBack(PosEnemy.position, enemyStatus));
-
-                Debug.Log(hit.collider.name + " GameObject");
             }
 
         }
@@ -59,8 +56,6 @@ public class PlayerAttack : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime);
             yield return null;
         }
-        //yield return StartCoroutine(MoveToPos(originalPos));
-        //isMoving = false;
     }
 
     IEnumerator MoveToEnemyandBack(Vector2 enemyPos, EnemyStatus enemyStatus)
@@ -68,12 +63,10 @@ public class PlayerAttack : MonoBehaviour
         yield return StartCoroutine(MoveToPos(enemyPos));
         GM.SpawnEnemySlider(enemyPos + new Vector2(0, 0.5f), PosEnemy);
         enemyStatus.CurrentHealth -= 25f;
-        Debug.Log(enemyStatus.CurrentHealth + " darah musuh");
         AM.PlayerAttack.Play();
+        GM.CallRotationWeapon();
+        yield return new WaitForSeconds(0.05f);
         AM.EnemyTakeDamage.Play();
-        yield return new WaitForSeconds(0.5f);
-        AM.PlayerAttack.Stop();
-        AM.EnemyTakeDamage.Stop();
         yield return StartCoroutine(MoveToPos(originalPos));
         GM.turn = "Enemy";
     }
@@ -85,11 +78,6 @@ public class PlayerAttack : MonoBehaviour
         spriteRenderer.material.SetFloat("_DissolveAmount", dissolveAmount);
         yield return new WaitForSeconds(1f);
         GM.gameOver();
-        //Destroy(gameObject);
-
     }
-
-
-
 
 }

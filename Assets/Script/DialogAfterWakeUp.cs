@@ -34,7 +34,6 @@ public class DialogAfterWakeUp : MonoBehaviour
         EnterText.gameObject.SetActive(false);
         DialogPanel.gameObject.SetActive(false);
         PlayerImageDialog.gameObject.SetActive(false);
-        //PlayerPrefs.DeleteKey("DialogWakeUp");
         if (PlayerPrefs.GetInt("DialogWakeUp") == 0)
         {
             StartCoroutine(CDOutputDialogPanel());

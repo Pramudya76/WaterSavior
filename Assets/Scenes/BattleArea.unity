@@ -1497,6 +1497,7 @@ MonoBehaviour:
   - {fileID: 317343976}
   - {fileID: 272496600}
   WinGamePanel: {fileID: 630681856}
+  WeaponPlayer: {fileID: 1661625396}
 --- !u!4 &326064707
 Transform:
   m_ObjectHideFlags: 0
@@ -5489,7 +5490,7 @@ GameObject:
   - component: {fileID: 1661625399}
   - component: {fileID: 1661625398}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

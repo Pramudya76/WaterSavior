@@ -46,8 +46,6 @@ public class GoOutorInsideHouse : MonoBehaviour
             Button = Instantiate(ButtonPrefabs, PlayerPos.transform.position + new Vector3(0.8f, 0.5f, 0), Quaternion.identity, canvaPos);
             Button.layer = 5;
             isButtonActive = true;
-
-
         }
     }
     

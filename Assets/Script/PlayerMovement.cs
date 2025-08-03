@@ -27,8 +27,6 @@ public class PlayerMovement : MonoBehaviour
             transform.position = new Vector3(x, y, z);
             PlayerPrefs.DeleteKey("SaveGame");
         }
-
-
     }
 
     // Update is called once per frame
@@ -61,12 +59,10 @@ public class PlayerMovement : MonoBehaviour
         if (movement.x > 0)
         {
             mySpriteRenderer.flipX = false;
-            //AM.Walk.Play();
         }
         else if (movement.x < 0)
         {
             mySpriteRenderer.flipX = true;
-            //AM.Walk.Play();
         }
     }
 }

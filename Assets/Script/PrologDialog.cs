@@ -49,7 +49,6 @@ public class PrologDialog : MonoBehaviour
         StartCoroutine(DialogShowUpOut(0, 1));
         yield return new WaitForSeconds(1f);
         StartCoroutine(Typing());
-
     }
 
     IEnumerator Typing()

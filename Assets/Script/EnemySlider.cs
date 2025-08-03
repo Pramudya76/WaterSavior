@@ -11,9 +11,7 @@ public class EnemySlider : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //PA = GameObject.FindWithTag("Player").GetComponent<PlayerAttack>();
         sliderEnemy = GetComponent<Slider>();
-        //ES = GameObject.FindWithTag("Enemy").GetComponent<EnemyStatus>();
     }
     public void setSlider(EnemyStatus enemyStatus)
     {
@@ -36,7 +34,4 @@ public class EnemySlider : MonoBehaviour
             fill.enabled = true;
         }
     }
-
-    
-
 }

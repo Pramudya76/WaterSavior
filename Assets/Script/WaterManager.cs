@@ -10,7 +10,6 @@ public class WaterManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //PW = GameObject.FindWithTag("DirtWater").GetComponent<PurifyWater>();
         WaterName = PlayerPrefs.GetString("CurrentWater");
     }
 

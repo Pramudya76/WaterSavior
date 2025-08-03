@@ -52,7 +52,6 @@ public class DialogWithSpirit : MonoBehaviour
     public Transform canvaPos;
     private GameObject Button;
     private bool isButton = false;
-    private bool isPlayer = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -118,7 +117,6 @@ public class DialogWithSpirit : MonoBehaviour
     {
         DialogText.text = "";
         StartCoroutine(DialogShowUpOut(0, 1));
-        //DialogPanel.gameObject.SetActive(true);
         yield return new WaitForSeconds(1f);
         StartCoroutine(TypingDialog());
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -22,7 +23,8 @@ public class GameManager : MonoBehaviour
     public GameObject WinGamePanel;
     private int indexWaterDone;
     private AudioManager AM;
-    //private PurifyWater PW;
+    public GameObject WeaponPlayer;
+    private Quaternion OriginalRotation;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +34,7 @@ public class GameManager : MonoBehaviour
         WinGamePanel.gameObject.SetActive(false);
         WM = GameObject.FindWithTag("WaterManager").GetComponent<WaterManager>();
         AM = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
+        OriginalRotation = WeaponPlayer.transform.rotation;
         Time.timeScale = 1;
     }
 
@@ -48,7 +51,6 @@ public class GameManager : MonoBehaviour
         {
             StartCoroutine(WinGame());
         }
-
     }
 
     public void healthPlayerValue()
@@ -69,41 +71,26 @@ public class GameManager : MonoBehaviour
         GameObject sliderEnemy = Instantiate(SliderEnemyPrefabs, enemy, Quaternion.identity, ParentCanva);
         Transform handler = sliderEnemy.transform.Find("Handle Slide Area");
         ES = TargetPos.GetComponent<EnemyStatus>();
+
         EnemySlider enemySlider = sliderEnemy.AddComponent<EnemySlider>();
-
-
-
         Slider EnemySlider = sliderEnemy.GetComponent<Slider>();
+
         enemySlider.setSlider(ES);
-        //EnemySlider.onValueChanged.AddListener(ES.EnemyHealth);
-        //EnemySlider.value = ES.CurrentHealth;
         EnemySlider.maxValue = ES.CurrentHealth;
 
         enemySlider.enemyPos = TargetPos;
         handler.gameObject.SetActive(false);
-
     }
 
     public void SpawnEnemy(int jumlahEnemy)
     {
         List<Transform> enemySpawn = new List<Transform>(enemySpawnPos);
-        // foreach (Transform pos in enemySpawnPos)
-        // {
-        //     if (pos == null) continue;
-        //     int enemySpawnRandom = UnityEngine.Random.Range(0, enemy.Length);
-        //     int enemySpawnLocation = UnityEngine.Random.Range(0, enemySpawn.Count);
-        //     GameObject enemyPrefabs = Instantiate(enemy[enemySpawnRandom], pos.position, Quaternion.identity);
-
-        // }
-
         for (int a = 0; a < jumlahEnemy; a++)
         {
             int enemySpawnRandom = UnityEngine.Random.Range(0, enemy.Length);
             int enemySpawnLocation = UnityEngine.Random.Range(0, enemySpawn.Count);
             GameObject enemyPrefabs = Instantiate(enemy[enemySpawnRandom], enemySpawn[a].position, Quaternion.identity);
         }
-
-        //enemySpawn.RemoveAt(enemySpawnLocation);
     }
 
     public void gameOver()
@@ -129,6 +116,25 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("WaterDone", indexWaterDone);
         PlayerPrefs.Save();
         SceneManager.LoadScene("Outdoor");
+    }
+
+    public void CallRotationWeapon()
+    {
+        StartCoroutine(RotateWeaponPlayer());
+    }
+
+    IEnumerator RotateWeaponPlayer()
+    {
+        while (Quaternion.Angle(WeaponPlayer.transform.rotation, Quaternion.Euler(0, 0, -20)) > 0.1f)
+        {
+            WeaponPlayer.transform.rotation = Quaternion.RotateTowards(WeaponPlayer.transform.rotation, Quaternion.Euler(0, 0, -20), 5f * Time.deltaTime);
+            
+        }
+        yield return new WaitForSeconds(0.5f);
+        while (Quaternion.Angle(WeaponPlayer.transform.rotation, OriginalRotation) > 0.1f)
+        {
+            WeaponPlayer.transform.rotation = Quaternion.RotateTowards(WeaponPlayer.transform.rotation, OriginalRotation, 5f * Time.deltaTime);
+        }
     }
 
 

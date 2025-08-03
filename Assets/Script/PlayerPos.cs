@@ -17,11 +17,6 @@ public class PlayerPos : MonoBehaviour
             float y = PlayerPrefs.GetFloat("PlayerY_" + SceneName);
             float z = PlayerPrefs.GetFloat("PlayerZ_" + SceneName);
             Player.transform.position = new Vector3(x, y, z);
-            Debug.Log("Berjalan posisi player");
-        }
-        else
-        {
-            Debug.Log("Tdk berjalan posisi player");
         }
     }
 
