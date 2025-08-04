@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 
@@ -15,6 +16,8 @@ public class PlayerAttack : MonoBehaviour
     private AudioManager AM;
     Animator animator;
     private bool isPlayerTurn = true;
+    public GameObject DamageUI;
+    public Transform canvasPos;
     // Start is called before the first frame update
     void Start()
     {
@@ -67,11 +70,16 @@ public class PlayerAttack : MonoBehaviour
         animator.SetFloat("yvelocity", 1);
         yield return StartCoroutine(MoveToPos(enemyPos));
         GM.SpawnEnemySlider(enemyPos + new Vector2(0, 0.5f), PosEnemy);
+        GameObject Damage = Instantiate(DamageUI, enemyPos + new Vector2(0.8f, -0.3f), Quaternion.identity, canvasPos);
+        TextMeshProUGUI DamageText = Damage.GetComponent<TextMeshProUGUI>();
+        DamageText.text = "25";
         enemyStatus.CurrentHealth -= 25f;
         AM.PlayerAttack.Play();
         GM.CallRotationWeapon();
         yield return new WaitForSeconds(0.05f);
         AM.EnemyTakeDamage.Play();
+        yield return new WaitForSeconds(1f);
+        Destroy(Damage);
         yield return StartCoroutine(MoveToPos(originalPos));
         animator.SetFloat("xvelocity", 0);
         animator.SetFloat("yvelocity", 0);

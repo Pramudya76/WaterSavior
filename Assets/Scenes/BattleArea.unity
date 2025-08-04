@@ -2192,6 +2192,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 200
   PosEnemy: {fileID: 0}
+  DamageUI: {fileID: 2516447976908343388, guid: d740f05556f88484dab4845b92685715, type: 3}
+  canvasPos: {fileID: 1708253681}
 --- !u!1 &493583088
 GameObject:
   m_ObjectHideFlags: 0
@@ -5446,6 +5448,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 50
   enemy: []
+  DamageUI: {fileID: 2516447976908343388, guid: d740f05556f88484dab4845b92685715, type: 3}
+  canvasPos: {fileID: 1708253681}
 --- !u!1 &1843994968
 GameObject:
   m_ObjectHideFlags: 0

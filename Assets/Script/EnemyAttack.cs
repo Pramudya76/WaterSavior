@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
@@ -13,6 +14,8 @@ public class EnemyAttack : MonoBehaviour
     private PlayerAttack PA;
     private int jumlahEnemy;
     private AudioManager AM;
+    public GameObject DamageUI;
+    public Transform canvasPos;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,16 +60,21 @@ public class EnemyAttack : MonoBehaviour
         }
         int angkaRandom = Random.Range(0, aliveEnemies.Count);
         GameObject enemyChose = aliveEnemies[angkaRandom];
+
         Vector2 enemyPos = enemyChose.transform.position;
 
         Vector2 playerPos = (Vector2)Player.transform.position + new Vector2(1, 0);
         Vector2 enemyBack = (Vector2)enemyPos + new Vector2(0.3f, 0);
 
         yield return StartCoroutine(MoveToPos(playerPos, enemyChose));
+        GameObject Damage = Instantiate(DamageUI, playerPos + new Vector2(-1.8f, -0.3f), Quaternion.identity, canvasPos);
+        TextMeshProUGUI DamageText = Damage.GetComponent<TextMeshProUGUI>();
+        DamageText.text = "10";
         PA.health -= 10f;
         AM.EnemyAttack.Play();
         yield return new WaitForSeconds(0.5f);
         AM.PlayerTakeDamage.Play();
+        Destroy(Damage);
         yield return StartCoroutine(MoveToPos(enemyBack, enemyChose));
         GM.turn = "Player";
         isMoving = false;

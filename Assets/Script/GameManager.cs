@@ -88,8 +88,8 @@ public class GameManager : MonoBehaviour
         for (int a = 0; a < jumlahEnemy; a++)
         {
             int enemySpawnRandom = UnityEngine.Random.Range(0, enemy.Length);
-            int enemySpawnLocation = UnityEngine.Random.Range(0, enemySpawn.Count);
             GameObject enemyPrefabs = Instantiate(enemy[enemySpawnRandom], enemySpawn[a].position, Quaternion.identity);
+
         }
     }
 
@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviour
         while (Quaternion.Angle(WeaponPlayer.transform.rotation, Quaternion.Euler(0, 0, -20)) > 0.1f)
         {
             WeaponPlayer.transform.rotation = Quaternion.RotateTowards(WeaponPlayer.transform.rotation, Quaternion.Euler(0, 0, -20), 5f * Time.deltaTime);
-            
+
         }
         yield return new WaitForSeconds(0.5f);
         while (Quaternion.Angle(WeaponPlayer.transform.rotation, OriginalRotation) > 0.1f)
@@ -136,6 +136,5 @@ public class GameManager : MonoBehaviour
             WeaponPlayer.transform.rotation = Quaternion.RotateTowards(WeaponPlayer.transform.rotation, OriginalRotation, 5f * Time.deltaTime);
         }
     }
-
 
 }
