@@ -52,6 +52,7 @@ public class DialogWithSpirit : MonoBehaviour
     public Transform canvaPos;
     private GameObject Button;
     private bool isButton = false;
+    private bool isPress = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +67,7 @@ public class DialogWithSpirit : MonoBehaviour
         Collider2D area = Physics2D.OverlapCircle(transform.position, 4f, layer);
         if (area != null)
         {
+            PlayerMovement PM = area.gameObject.GetComponent<PlayerMovement>();
             if (Button != null)
             {
                 Button.transform.position = transform.position + new Vector3(0, 2, 0);
@@ -75,8 +77,10 @@ public class DialogWithSpirit : MonoBehaviour
                 Button = Instantiate(ButtonPrefabs, transform.position + new Vector3(0, 1, 0), Quaternion.identity, canvaPos);
                 isButton = true;
             }
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.F) && !isPress)
             {
+                isPress = true;
+                PM.enabled = false;
                 StartCoroutine(CDPanel());
                 Button.gameObject.SetActive(false);
                 isButton = true;
