@@ -11,7 +11,8 @@ public class DialogFinishedWater : MonoBehaviour
         "Akhirnya selesai juga",
         "Hmmm...",
         "Selanjutnya apa lagi?",
-        "Mungkin dengan tidur aku bisa bertemu dengan roh itu lagi."
+        "Huh... lelah sekali rasanya",
+        "Padahal aku nganggur... hahahahahaha"
     };
     public TextMeshProUGUI textNarasi;
     private int index = 0;
@@ -28,7 +29,7 @@ public class DialogFinishedWater : MonoBehaviour
         DialogPanel.gameObject.SetActive(false);
         EnterText.gameObject.SetActive(false);
         PM = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
-        if (PlayerPrefs.GetInt("WaterDone") == WaterIndex.Length)
+        if (PlayerPrefs.GetInt("WaterDone") == WaterIndex.Length && !PlayerPrefs.HasKey("WaterFinished"))
         {
             StartCoroutine(CDOutputDialogPanel());
             PlayerPrefs.SetInt("WaterFinished", 1);

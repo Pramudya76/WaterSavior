@@ -3395,9 +3395,9 @@ RectTransform:
   - {fileID: 1336950699}
   m_Father: {fileID: 105366750}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -273.2, y: 126.8}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 81.79999, y: -29.199997}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &387054960
@@ -8678,8 +8678,8 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 1.4180162, y: 2.1912222}
-      - {x: -1.3582578, y: 2.1957302}
+    - - {x: 1.5141962, y: 2.75456}
+      - {x: -1.5368769, y: 2.7590675}
       - {x: -3.065997, y: 0.3800559}
       - {x: -2.7736754, y: -2.4423244}
       - {x: 1.4321874, y: -2.4807181}

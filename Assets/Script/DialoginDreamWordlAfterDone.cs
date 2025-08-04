@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DialoginDreamWordlAfterDone : MonoBehaviour
 {
@@ -147,7 +148,11 @@ public class DialoginDreamWordlAfterDone : MonoBehaviour
             TamatPanelCanvas.alpha = Mathf.Lerp(start, target, t);
             TamatPanel.gameObject.SetActive(true);
             yield return null;
+            
         }
+        yield return new WaitForSeconds(3f);
+        PlayerPrefs.DeleteKey("SaveData");
+        SceneManager.LoadScene("MainMenu");
     }
 
 }

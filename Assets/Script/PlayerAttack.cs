@@ -13,9 +13,11 @@ public class PlayerAttack : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private float dissolveAmount = 0;
     private AudioManager AM;
+    Animator animator;
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         GM = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         AM = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
         originalPos = transform.position;
@@ -60,6 +62,8 @@ public class PlayerAttack : MonoBehaviour
 
     IEnumerator MoveToEnemyandBack(Vector2 enemyPos, EnemyStatus enemyStatus)
     {
+        animator.SetFloat("xvelocity", 1);
+        animator.SetFloat("yvelocity", 1);
         yield return StartCoroutine(MoveToPos(enemyPos));
         GM.SpawnEnemySlider(enemyPos + new Vector2(0, 0.5f), PosEnemy);
         enemyStatus.CurrentHealth -= 25f;
@@ -68,6 +72,8 @@ public class PlayerAttack : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
         AM.EnemyTakeDamage.Play();
         yield return StartCoroutine(MoveToPos(originalPos));
+        animator.SetFloat("xvelocity", 0);
+        animator.SetFloat("yvelocity", 0);
         GM.turn = "Enemy";
     }
 

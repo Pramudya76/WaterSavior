@@ -78,6 +78,7 @@ public class DialogWithSpirit : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.F))
             {
                 StartCoroutine(CDPanel());
+                Button.gameObject.SetActive(false);
                 isButton = true;
             }
             if (Input.GetKeyDown(KeyCode.Return) && !isTyping)

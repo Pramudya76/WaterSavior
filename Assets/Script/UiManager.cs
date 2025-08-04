@@ -64,7 +64,6 @@ public class UiManager : MonoBehaviour
     public void ExitSettingLayer()
     {
         SettingLayer.gameObject.SetActive(false);
-        Time.timeScale = 1;
     }
 
 }
