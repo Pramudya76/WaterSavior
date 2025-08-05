@@ -15,3 +15,4 @@ MonoBehaviour:
   enemyName: FlyBacteria
   maxHealth: 50
   sprite: {fileID: 504971887326506605, guid: 9933498259796db4ebf253d7db83908b, type: 3}
+  speed: 50

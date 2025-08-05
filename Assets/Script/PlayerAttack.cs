@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -15,9 +16,16 @@ public class PlayerAttack : MonoBehaviour
     private float dissolveAmount = 0;
     private AudioManager AM;
     Animator animator;
-    private bool isPlayerTurn = true;
+    public bool isPlayerTurn = false;
     public GameObject DamageUI;
     public Transform canvasPos;
+
+    public String unitName = "Player";
+    public int speed = 100;
+    public float gauge = 0f;
+    public float gaugetoAct = 100f;
+    public bool isInQueue = false;
+    public Sprite PlayerSprite;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +39,7 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && GM.turn == "Player" && isPlayerTurn)
+        if (Input.GetMouseButtonDown(0) && isPlayerTurn)
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
@@ -41,13 +49,11 @@ public class PlayerAttack : MonoBehaviour
                 GameObject enemyTarget = hit.collider.gameObject;
                 PosEnemy = hit.collider.transform;
                 EnemyStatus enemyStatus = enemyTarget.GetComponent<EnemyStatus>();
-                isPlayerTurn = false;
                 StartCoroutine(MoveToEnemyandBack(PosEnemy.position, enemyStatus));
+                
             }
 
         }
-        Debug.Log(health);
-
         if (health <= 0)
         {
             StartCoroutine(CDBeforeDie());
@@ -83,8 +89,7 @@ public class PlayerAttack : MonoBehaviour
         yield return StartCoroutine(MoveToPos(originalPos));
         animator.SetFloat("xvelocity", 0);
         animator.SetFloat("yvelocity", 0);
-        GM.turn = "Enemy";
-        isPlayerTurn = true;
+        isPlayerTurn = false;
     }
 
     IEnumerator CDBeforeDie()

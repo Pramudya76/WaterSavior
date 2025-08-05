@@ -6,4 +6,5 @@ public class EnemyData : ScriptableObject
     public string enemyName;
     public float maxHealth = 50f;
     public Sprite sprite;
+    public int speed;
 }

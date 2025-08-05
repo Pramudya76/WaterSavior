@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5613091079875680603}
   - component: {fileID: 6041064474420362716}
   - component: {fileID: 1094266788570144999}
+  - component: {fileID: 8459269943243589357}
   m_Layer: 0
   m_Name: Enemy 7
   m_TagString: Enemy
@@ -194,6 +195,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: f45fc479cf183a048969caf72161f3cf, type: 2}
+  unitName: 
+  speed: 0
+  gauge: 0
+  gaugetoAct: 100
+  isPlayer: 0
   CurrentHealth: 0
 --- !u!95 &1094266788570144999
 Animator:
@@ -217,3 +223,17 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8459269943243589357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4742161092246072888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cae5656959c28842bee50c8dab5ccfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 50
+  DamageUI: {fileID: 2516447976908343388, guid: d740f05556f88484dab4845b92685715, type: 3}

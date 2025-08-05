@@ -5,17 +5,15 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-    [HideInInspector] public float health = 50f;
-    public GameObject[] enemy;
     private GameObject Player;
     private float moveSpeed = 9f;
     private GameManager GM;
-    private bool isMoving = false;
+
     private PlayerAttack PA;
-    private int jumlahEnemy;
+    
     private AudioManager AM;
     public GameObject DamageUI;
-    public Transform canvasPos;
+    private Transform canvasPos;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,19 +21,14 @@ public class EnemyAttack : MonoBehaviour
         GM = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         PA = GameObject.FindWithTag("Player").GetComponent<PlayerAttack>();
         AM = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
-        jumlahEnemy = PlayerPrefs.GetInt("JumlahEnemy", 0);
-        GM.SpawnEnemy(jumlahEnemy);
-        enemy = GameObject.FindGameObjectsWithTag("Enemy");
+        
+        canvasPos = GameObject.FindWithTag("CanvasPos").GetComponent<Transform>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GM.turn == "Enemy" && !isMoving)
-        {
-            isMoving = true;
-            StartCoroutine(MoveAndBack());
-        }
+        
     }
 
     IEnumerator MoveToPos(Vector2 pos, GameObject objt)
@@ -48,25 +41,14 @@ public class EnemyAttack : MonoBehaviour
         objt.transform.position = pos;
     }
 
-    IEnumerator MoveAndBack()
+    public IEnumerator MoveAndBack()
     {
-        List<GameObject> aliveEnemies = new List<GameObject>();
-        foreach (GameObject e in enemy)
-        {
-            if (e != null)
-            {
-                aliveEnemies.Add(e);
-            }
-        }
-        int angkaRandom = Random.Range(0, aliveEnemies.Count);
-        GameObject enemyChose = aliveEnemies[angkaRandom];
-
-        Vector2 enemyPos = enemyChose.transform.position;
+        Vector2 enemyPos = transform.position;
 
         Vector2 playerPos = (Vector2)Player.transform.position + new Vector2(1, 0);
         Vector2 enemyBack = (Vector2)enemyPos + new Vector2(0.3f, 0);
 
-        yield return StartCoroutine(MoveToPos(playerPos, enemyChose));
+        yield return StartCoroutine(MoveToPos(playerPos, gameObject));
         GameObject Damage = Instantiate(DamageUI, playerPos + new Vector2(-1.8f, -0.3f), Quaternion.identity, canvasPos);
         TextMeshProUGUI DamageText = Damage.GetComponent<TextMeshProUGUI>();
         DamageText.text = "10";
@@ -75,8 +57,6 @@ public class EnemyAttack : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         AM.PlayerTakeDamage.Play();
         Destroy(Damage);
-        yield return StartCoroutine(MoveToPos(enemyBack, enemyChose));
-        GM.turn = "Player";
-        isMoving = false;
+        yield return StartCoroutine(MoveToPos(enemyBack, gameObject));
     }
 }

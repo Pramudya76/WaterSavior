@@ -15,3 +15,4 @@ MonoBehaviour:
   enemyName: JellyBacteria
   maxHealth: 50
   sprite: {fileID: 2534377689220739006, guid: 9933498259796db4ebf253d7db83908b, type: 3}
+  speed: 50

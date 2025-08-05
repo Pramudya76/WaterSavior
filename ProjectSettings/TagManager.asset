@@ -11,6 +11,8 @@ TagManager:
   - PlayerPosManager
   - UiManager
   - AudioManager
+  - TurnManager
+  - CanvasPos
   layers:
   - Default
   - TransparentFX
