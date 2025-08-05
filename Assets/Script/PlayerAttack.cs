@@ -26,6 +26,7 @@ public class PlayerAttack : MonoBehaviour
     public float gaugetoAct = 100f;
     public bool isInQueue = false;
     public Sprite PlayerSprite;
+    public bool isTurn = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +40,7 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && isPlayerTurn)
+        if (Input.GetMouseButtonDown(0) && isPlayerTurn && !isTurn)
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
@@ -72,6 +73,8 @@ public class PlayerAttack : MonoBehaviour
 
     IEnumerator MoveToEnemyandBack(Vector2 enemyPos, EnemyStatus enemyStatus)
     {
+        isPlayerTurn = true;
+        isTurn = true;
         animator.SetFloat("xvelocity", 1);
         animator.SetFloat("yvelocity", 1);
         yield return StartCoroutine(MoveToPos(enemyPos));
@@ -80,16 +83,18 @@ public class PlayerAttack : MonoBehaviour
         TextMeshProUGUI DamageText = Damage.GetComponent<TextMeshProUGUI>();
         DamageText.text = "25";
         enemyStatus.CurrentHealth -= 25f;
+
         AM.PlayerAttack.Play();
         GM.CallRotationWeapon();
         yield return new WaitForSeconds(0.05f);
         AM.EnemyTakeDamage.Play();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         Destroy(Damage);
         yield return StartCoroutine(MoveToPos(originalPos));
         animator.SetFloat("xvelocity", 0);
         animator.SetFloat("yvelocity", 0);
         isPlayerTurn = false;
+        isTurn = false;
     }
 
     IEnumerator CDBeforeDie()

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyStatus : MonoBehaviour
@@ -49,7 +50,7 @@ public class EnemyStatus : MonoBehaviour
         SpriteRenderer.material.SetFloat("_DissolveAmount", dissolveAmount);
         yield return new WaitForSeconds(1f);
         TM.allUnits.Remove(gameObject.GetComponent<EnemyStatus>());
-        TM.displayQueue.Remove(this);
+        TM.displayQueue.RemoveAll(unit => unit == this);
         GameObject.FindWithTag("GameManager").GetComponent<GameManager>().TurnImage();
         Destroy(gameObject);
     }

@@ -51,18 +51,17 @@ public class TurnManager : MonoBehaviour
             if (unit is PlayerAttack Player)
             {
                 Player.gauge += Player.speed * Time.deltaTime;
-                if (Player.gauge >= Player.gaugetoAct)
+                while (Player.gauge >= Player.gaugetoAct)
                 {
                     Player.gauge -= Player.gaugetoAct;
                     turnQueue.Enqueue(Player);
                     displayQueue.Add(Player);
-                    Debug.Log("Player masuk ke turnQueue");
                 }
             }
             else if (unit is EnemyStatus Enemy)
             {
                 Enemy.gauge += Enemy.speed * Time.deltaTime;
-                if (Enemy.gauge >= Enemy.gaugetoAct)
+                while (Enemy.gauge >= Enemy.gaugetoAct)
                 {
                     Enemy.gauge -= Enemy.gaugetoAct;
                     turnQueue.Enqueue(Enemy);
@@ -83,9 +82,7 @@ public class TurnManager : MonoBehaviour
             {
                 GM.turn = "Player";
                 Player.isPlayerTurn = true;
-
                 yield return new WaitUntil(() => Player.isPlayerTurn == false);
-
             }
             else if (unit is EnemyStatus Enemy)
             {
@@ -105,6 +102,4 @@ public class TurnManager : MonoBehaviour
         isNow = false;
         turnProgress = false;
     }
-
-
 }
