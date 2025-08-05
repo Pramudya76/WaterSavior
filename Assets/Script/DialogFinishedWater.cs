@@ -12,7 +12,6 @@ public class DialogFinishedWater : MonoBehaviour
         "Hmmm...",
         "Selanjutnya apa lagi?",
         "Huh... lelah sekali rasanya",
-        "Padahal aku nganggur... hahahahahaha"
     };
     public TextMeshProUGUI textNarasi;
     private int index = 0;
