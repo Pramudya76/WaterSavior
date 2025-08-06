@@ -26,9 +26,9 @@ public class AudioManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-
+        DontDestroyOnLoad(gameObject);
     }
 
     public void MusicVolume()
