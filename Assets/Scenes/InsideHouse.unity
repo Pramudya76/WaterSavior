@@ -2379,10 +2379,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1292181525}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -303.16998, y: 12.139992}
-  m_SizeDelta: {x: 112.52, y: 141.73}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 96.83002, y: 183}
+  m_SizeDelta: {x: 112.51999, y: 141.73}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &420080991
 MonoBehaviour:
@@ -6220,10 +6220,10 @@ RectTransform:
   - {fileID: 860123114}
   m_Father: {fileID: 1292181525}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.13000488, y: 3.149994}
-  m_SizeDelta: {x: -452.05, y: -67.04}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 17.520004, y: 7}
+  m_SizeDelta: {x: 312.64, y: 264.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &895302806
 MonoBehaviour:
@@ -6917,9 +6917,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1836930724}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 329, y: -46}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -44, y: 21}
   m_SizeDelta: {x: 108.22, y: 32.42}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1158816978
@@ -8207,10 +8207,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1836930724}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.18, y: 0.79}
-  m_SizeDelta: {x: 721.59, y: 110.16}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -1.1799927, y: 6.6800003}
+  m_SizeDelta: {x: -24.409973, y: -44.059998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1267376309
 CanvasRenderer:
@@ -8270,9 +8270,9 @@ MonoBehaviour:
   m_fontSize: 24
   m_fontSizeBase: 24
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 24
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
@@ -9652,9 +9652,9 @@ RectTransform:
   m_Father: {fileID: 1292181525}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -4.1700134, y: -103.69}
-  m_SizeDelta: {x: -54.25, y: -207.36}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -4.1700134, y: 62.5}
+  m_SizeDelta: {x: -54.25, y: 125.02}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1836930725
 MonoBehaviour:
