@@ -53,6 +53,9 @@ public class PurifyWater : MonoBehaviour
         {
             PlayerPos = collision.transform;
             Button = Instantiate(ButtonPrefabs, collision.transform.position + new Vector3(0.8f, 0.5f, 0), Quaternion.identity, canvaPos);
+            int childCount = canvaPos.childCount;
+            int targetIndex = Mathf.Max(0, childCount - 2);
+            Button.transform.SetSiblingIndex(targetIndex);
             isButtonActive = true;
         }
     }

@@ -25,12 +25,6 @@ public class AudioManager : MonoBehaviour
         MusicVolumeSlider.value = PlayerPrefs.GetFloat("VolumeMusic", -10);
     }
 
-    // Update is called once per frame
-    private void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
-
     public void MusicVolume()
     {
         AudioMixer.SetFloat("VolMusic", MusicVolumeSlider.value);

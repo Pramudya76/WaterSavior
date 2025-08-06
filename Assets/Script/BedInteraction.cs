@@ -31,6 +31,9 @@ public class BedInteraction : MonoBehaviour
         {
             Transform Player = collision.GetComponent<Transform>();
             Button = Instantiate(ButtonPrefabs, Player.transform.position + new Vector3(-0.8f, 1, 0), Quaternion.identity, canvaPos);
+            int childCount = canvaPos.childCount;
+            int targetIndex = Mathf.Max(0, childCount - 2);
+            Button.transform.SetSiblingIndex(targetIndex);
         }
     }
 

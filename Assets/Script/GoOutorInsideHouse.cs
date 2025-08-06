@@ -45,6 +45,9 @@ public class GoOutorInsideHouse : MonoBehaviour
         {
             PlayerPos = collision.gameObject;
             Button = Instantiate(ButtonPrefabs, PlayerPos.transform.position + new Vector3(0.8f, 0.5f, 0), Quaternion.identity, canvaPos);
+            int childCount = canvaPos.childCount;
+            int targetIndex = Mathf.Max(0, childCount - 2);
+            Button.transform.SetSiblingIndex(targetIndex);
             Button.layer = 5;
             isButtonActive = true;
         }

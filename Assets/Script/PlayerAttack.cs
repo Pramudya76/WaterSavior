@@ -83,7 +83,6 @@ public class PlayerAttack : MonoBehaviour
         TextMeshProUGUI DamageText = Damage.GetComponent<TextMeshProUGUI>();
         DamageText.text = "25";
         enemyStatus.CurrentHealth -= 25f;
-
         AM.PlayerAttack.Play();
         GM.CallRotationWeapon();
         yield return new WaitForSeconds(0.05f);
