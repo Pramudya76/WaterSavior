@@ -13,12 +13,13 @@ public class GoOutorInsideHouse : MonoBehaviour
     public Transform canvaPos;
     private GameObject PlayerPos;
     public String SceneTargetName;
+    public Animator animator;
     //public String SceneName;
     // Start is called before the first frame update
     void Start()
     {
         PlayerPos = GameObject.FindWithTag("Player");
-        
+
     }
 
     // Update is called once per frame
@@ -33,7 +34,7 @@ public class GoOutorInsideHouse : MonoBehaviour
                 PlayerPrefs.SetFloat("PlayerY_" + SceneManager.GetActiveScene().name, PlayerPos.transform.position.y);
                 PlayerPrefs.SetFloat("PlayerZ_" + SceneManager.GetActiveScene().name, PlayerPos.transform.position.z);
                 PlayerPrefs.Save();
-                SceneManager.LoadScene(SceneTargetName);
+                StartCoroutine(CDFadePanel(1f, SceneTargetName));
             }
         }
     }
@@ -48,7 +49,7 @@ public class GoOutorInsideHouse : MonoBehaviour
             isButtonActive = true;
         }
     }
-    
+
     public void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -56,6 +57,13 @@ public class GoOutorInsideHouse : MonoBehaviour
             Destroy(Button);
             isButtonActive = false;
         }
+    }
+    
+    IEnumerator CDFadePanel(float duration, String nameScene)
+    {
+        animator.SetTrigger("FinishScene");
+        yield return new WaitForSeconds(duration);
+        SceneManager.LoadScene(nameScene);
     }
 
 }

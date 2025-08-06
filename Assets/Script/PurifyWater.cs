@@ -14,7 +14,7 @@ public class PurifyWater : MonoBehaviour
     public int jumlahEnemy;
     public GameObject[] dirtWater;
     public String nameWater;
-    
+    public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +42,7 @@ public class PurifyWater : MonoBehaviour
                 PlayerPrefs.SetString("CurrentWater", nameWater);
                 PlayerPrefs.Save();
                 PlayerPrefs.SetInt("JumlahEnemy", jumlahEnemy);
-                SceneManager.LoadScene("BattleArea");
+                StartCoroutine(CDFadePanel(1f, "BattleArea"));
             }
         }
     }
@@ -53,17 +53,24 @@ public class PurifyWater : MonoBehaviour
         {
             PlayerPos = collision.transform;
             Button = Instantiate(ButtonPrefabs, collision.transform.position + new Vector3(0.8f, 0.5f, 0), Quaternion.identity, canvaPos);
-            isButtonActive = true; 
+            isButtonActive = true;
         }
     }
 
     public void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player" &&  PlayerPrefs.GetInt(nameWater) == 0)
+        if (collision.gameObject.tag == "Player" && PlayerPrefs.GetInt(nameWater) == 0)
         {
             Destroy(Button);
             isButtonActive = false;
         }
+    }
+    
+    IEnumerator CDFadePanel(float duration, String nameScene)
+    {
+        animator.SetTrigger("FinishScene");
+        yield return new WaitForSeconds(duration);
+        SceneManager.LoadScene(nameScene);
     }
 
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class UiManager : MonoBehaviour
     public GameObject SettingPanel;
     private GameObject PlayerPos;
     public GameObject SettingLayer;
+    public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +18,7 @@ public class UiManager : MonoBehaviour
         PlayerPos = GameObject.FindWithTag("Player");
         Time.timeScale = 1;
     }
-    
+
 
     // Update is called once per frame
     void Update()
@@ -51,19 +53,27 @@ public class UiManager : MonoBehaviour
         }
         PlayerPrefs.SetInt("SaveGame", 1);
         PlayerPrefs.Save();
-        SceneManager.LoadScene("MainMenu");
+        StartCoroutine(CDFadePanel(1f, "MainMenu"));
     }
 
     public void MainMenuButtonBattleArea()
     {
         PlayerPrefs.SetInt("SaveGame", 1);
         PlayerPrefs.Save();
-        SceneManager.LoadScene("MainMenu");
+        StartCoroutine(CDFadePanel(1f, "MainMenu"));
     }
 
     public void ExitSettingLayer()
     {
         SettingLayer.gameObject.SetActive(false);
+    }
+    
+    IEnumerator CDFadePanel(float duration, String nameScene)
+    {
+        Time.timeScale = 1;
+        animator.SetTrigger("FinishScene");
+        yield return new WaitForSeconds(duration);
+        SceneManager.LoadScene(nameScene);
     }
 
 }

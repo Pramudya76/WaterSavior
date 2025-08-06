@@ -53,6 +53,7 @@ public class DialogWithSpirit : MonoBehaviour
     private GameObject Button;
     private bool isButton = false;
     private bool isPress = false;
+    public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -98,7 +99,7 @@ public class DialogWithSpirit : MonoBehaviour
                     DialogPanel.gameObject.SetActive(false);
                     PlayerImageDialog.gameObject.SetActive(false);
                     SpiritImageDialog.gameObject.SetActive(false);
-                    StartCoroutine(CDChangeScene());
+                    StartCoroutine(CDFadePanel(1f, "InsideHouse"));
                 }
             }
         }
@@ -168,10 +169,11 @@ public class DialogWithSpirit : MonoBehaviour
         index++;
     }
 
-    IEnumerator CDChangeScene()
+    IEnumerator CDFadePanel(float duration, String nameScene)
     {
-        yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene("InsideHouse");
+        animator.SetTrigger("FinishScene");
+        yield return new WaitForSeconds(duration);
+        SceneManager.LoadScene(nameScene);
     }
 
 }

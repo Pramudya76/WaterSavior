@@ -50,6 +50,7 @@ public class DialoginDreamWordlAfterDone : MonoBehaviour
     public CanvasGroup Dialog;
     public GameObject TamatPanel;
     public CanvasGroup TamatPanelCanvas;
+    public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -148,11 +149,18 @@ public class DialoginDreamWordlAfterDone : MonoBehaviour
             TamatPanelCanvas.alpha = Mathf.Lerp(start, target, t);
             TamatPanel.gameObject.SetActive(true);
             yield return null;
-            
+
         }
         yield return new WaitForSeconds(3f);
         PlayerPrefs.DeleteKey("SaveData");
-        SceneManager.LoadScene("MainMenu");
+        StartCoroutine(CDFadePanel(1f, "MainMenu"));
+    }
+    
+    IEnumerator CDFadePanel(float duration, String nameScene)
+    {
+        animator.SetTrigger("FinishScene");
+        yield return new WaitForSeconds(duration);
+        SceneManager.LoadScene(nameScene);
     }
 
 }

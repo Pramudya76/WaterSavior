@@ -14,6 +14,7 @@ public class PrologDialog : MonoBehaviour
     private bool isTyping = false;
     public GameObject EnterText;
     public CanvasGroup Dialog;
+    public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +37,7 @@ public class PrologDialog : MonoBehaviour
             {
                 StartCoroutine(DialogShowUpOut(1, 0));
                 DialogPanel.gameObject.SetActive(false);
-                StartCoroutine(CDChangeScene());
+                StartCoroutine(CDFadePanel(1f, "DreamWorld"));
             }
         }
     }
@@ -78,10 +79,11 @@ public class PrologDialog : MonoBehaviour
         }
     }
 
-    IEnumerator CDChangeScene()
+    IEnumerator CDFadePanel(float duration, String nameScene)
     {
-        yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene("DreamWorld");
+        animator.SetTrigger("FinishScene");
+        yield return new WaitForSeconds(duration);
+        SceneManager.LoadScene(nameScene);
     }
 
 }

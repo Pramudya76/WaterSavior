@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     private TurnManager TM;
     private int index = 0;
     public bool isDie = false;
+    public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -111,7 +112,7 @@ public class GameManager : MonoBehaviour
 
     public void BackToPlayAgain()
     {
-        SceneManager.LoadScene("BattleArea");
+        StartCoroutine(CDFadePanel(1f, "BattleArea"));
     }
 
     IEnumerator WinGame()
@@ -124,7 +125,7 @@ public class GameManager : MonoBehaviour
         indexWaterDone += 1;
         PlayerPrefs.SetInt("WaterDone", indexWaterDone);
         PlayerPrefs.Save();
-        SceneManager.LoadScene("Outdoor");
+        StartCoroutine(CDFadePanel(1f, "Outdoor"));
     }
 
     public void CallRotationWeapon()
@@ -155,9 +156,9 @@ public class GameManager : MonoBehaviour
         foreach (var turn in TM.displayQueue)
         {
             if (index >= ImagesTurn.Length) break;
-            
+
             Image image = ImagesTurn[index].GetComponent<Image>();
-            image.gameObject.SetActive(true); 
+            image.gameObject.SetActive(true);
 
             if (turn is PlayerAttack player)
             {
@@ -176,8 +177,15 @@ public class GameManager : MonoBehaviour
         for (int i = index; i < ImagesTurn.Length; i++)
         {
             Image image = ImagesTurn[i].GetComponent<Image>();
-            image.sprite = null; 
+            image.sprite = null;
         }
+    }
+    
+    IEnumerator CDFadePanel(float duration, String nameScene)
+    {
+        animator.SetTrigger("FinishScene");
+        yield return new WaitForSeconds(duration);
+        SceneManager.LoadScene(nameScene);
     }
 
 

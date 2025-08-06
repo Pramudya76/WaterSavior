@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class UIMainMenu : MonoBehaviour
     public GameObject PanelBefore;
     public GameObject PanelAfter;
     public GameObject SettingLayer;
+    public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +37,7 @@ public class UIMainMenu : MonoBehaviour
         PlayerPrefs.DeleteAll();
         PlayerPrefs.SetInt("SaveData", 1);
         PlayerPrefs.Save();
-        SceneManager.LoadScene("SleepScene");
+        StartCoroutine(CDFadePanel(1f, "SleepScene"));
     }
 
     public void NewGame()
@@ -43,12 +45,12 @@ public class UIMainMenu : MonoBehaviour
         PlayerPrefs.DeleteAll();
         PlayerPrefs.SetInt("SaveData", 1);
         PlayerPrefs.Save();
-        SceneManager.LoadScene("SleepScene");
+        StartCoroutine(CDFadePanel(1f, "SleepScene"));
     }
 
     public void LoadGame()
     {
-        SceneManager.LoadScene(PlayerPrefs.GetString("CurrentScene"));
+        StartCoroutine(CDFadePanel(1f, PlayerPrefs.GetString("CurrentScene")));
     }
 
     public void ExitGame()
@@ -66,6 +68,13 @@ public class UIMainMenu : MonoBehaviour
     {
         SettingLayer.gameObject.SetActive(false);
         Time.timeScale = 1;
+    }
+
+    IEnumerator CDFadePanel(float duration, String nameScene)
+    {
+        animator.SetTrigger("FinishScene");
+        yield return new WaitForSeconds(duration);
+        SceneManager.LoadScene(nameScene);
     }
 
 }

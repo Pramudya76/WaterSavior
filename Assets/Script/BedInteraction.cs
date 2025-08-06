@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class BedInteraction : MonoBehaviour
     public GameObject ButtonPrefabs;
     private GameObject Button;
     public Transform canvaPos;
+    public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +21,7 @@ public class BedInteraction : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            SceneManager.LoadScene("DreamWorldAfterDone");
+            StartCoroutine(CDFadePanel(1f, "DreamWorldAfterDone"));
         }
     }
 
@@ -38,6 +40,13 @@ public class BedInteraction : MonoBehaviour
         {
             Destroy(Button);
         }
+    }
+
+    IEnumerator CDFadePanel(float duration, String nameScene)
+    {
+        animator.SetTrigger("FinishScene");
+        yield return new WaitForSeconds(duration);
+        SceneManager.LoadScene(nameScene);
     }
 
 }
