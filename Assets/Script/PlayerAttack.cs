@@ -27,6 +27,8 @@ public class PlayerAttack : MonoBehaviour
     public bool isInQueue = false;
     public Sprite PlayerSprite;
     public bool isTurn = false;
+    public Texture2D DefaultCursor;
+    public Texture2D ClickCursor;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,13 +42,15 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && isPlayerTurn && !isTurn)
-        {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+            Cursor.SetCursor(DefaultCursor, Vector2.zero, CursorMode.Auto);
 
             if (hit.collider != null && hit.collider.CompareTag("Enemy"))
             {
+                Cursor.SetCursor(ClickCursor, Vector2.zero, CursorMode.Auto);
+                if (Input.GetMouseButtonDown(0) && isPlayerTurn && !isTurn)
+                {
                 GameObject enemyTarget = hit.collider.gameObject;
                 PosEnemy = hit.collider.transform;
                 EnemyStatus enemyStatus = enemyTarget.GetComponent<EnemyStatus>();

@@ -10,12 +10,22 @@ public class UiManager : MonoBehaviour
     private GameObject PlayerPos;
     public GameObject SettingLayer;
     public Animator animator;
+    public Texture2D DefaultCursor;
+    public Texture2D ClickCursor;
     // Start is called before the first frame update
     void Start()
     {
         SettingLayer.gameObject.SetActive(false);
         SettingPanel.gameObject.SetActive(false);
         PlayerPos = GameObject.FindWithTag("Player");
+        if (SceneManager.GetActiveScene().name == "BattleArea")
+        {
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.visible = false;
+        }
         Time.timeScale = 1;
     }
 
@@ -26,11 +36,22 @@ public class UiManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SettingPanel.gameObject.SetActive(true);
+            Cursor.SetCursor(DefaultCursor, Vector2.zero, CursorMode.Auto);
+            Cursor.visible = true;
             Time.timeScale = 0;
         }
+       
     }
 
     public void ResumeButton()
+    {
+        SettingPanel.gameObject.SetActive(false);
+        //Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+        Cursor.visible = false;
+        Time.timeScale = 1;
+    }
+
+    public void ResumeButtonBattleArea()
     {
         SettingPanel.gameObject.SetActive(false);
         Time.timeScale = 1;

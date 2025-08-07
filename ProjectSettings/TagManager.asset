@@ -13,6 +13,7 @@ TagManager:
   - AudioManager
   - TurnManager
   - CanvasPos
+  - CursorManager
   layers:
   - Default
   - TransparentFX

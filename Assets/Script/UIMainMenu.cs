@@ -24,6 +24,7 @@ public class UIMainMenu : MonoBehaviour
             PanelAfter.gameObject.SetActive(false);
             PanelBefore.gameObject.SetActive(true);
         }
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
