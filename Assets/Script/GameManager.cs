@@ -201,12 +201,14 @@ public class GameManager : MonoBehaviour
     public void CallHealing()
     {
         PA.health += 30f;
+        PA.isPlayerTurn = false;
     }
 
     public void CallUltimate()
     {
         Ultimate.time = 0;
         Ultimate.Play();
+        StartCoroutine(CDUltimate());
     }
 
     public void SpawnFireball()
@@ -224,6 +226,12 @@ public class GameManager : MonoBehaviour
 
             Fireball.velocity = arah.normalized * 5f;
         }
+    }
+
+    IEnumerator CDUltimate()
+    {
+        yield return new WaitForSeconds(4f);
+        PA.isPlayerTurn = false;
     }
 
     

@@ -51,12 +51,12 @@ public class PlayerAttack : MonoBehaviour
                 Cursor.SetCursor(ClickCursor, Vector2.zero, CursorMode.Auto);
                 if (Input.GetMouseButtonDown(0) && isPlayerTurn && !isTurn && GM.isBasicAttack)
                 {
-                GameObject enemyTarget = hit.collider.gameObject;
-                PosEnemy = hit.collider.transform;
-                EnemyStatus enemyStatus = enemyTarget.GetComponent<EnemyStatus>();
-                StartCoroutine(MoveToEnemyandBack(PosEnemy.position, enemyStatus));
+                    GameObject enemyTarget = hit.collider.gameObject;
+                    PosEnemy = hit.collider.transform;
+                    EnemyStatus enemyStatus = enemyTarget.GetComponent<EnemyStatus>();
+                    StartCoroutine(MoveToEnemyandBack(PosEnemy.position, enemyStatus));
                 
-            }
+                }
 
         }
         if (health <= 0)
@@ -82,7 +82,7 @@ public class PlayerAttack : MonoBehaviour
         animator.SetFloat("xvelocity", 1);
         animator.SetFloat("yvelocity", 1);
         yield return StartCoroutine(MoveToPos(enemyPos));
-        GM.SpawnEnemySlider(enemyPos + new Vector2(0, 0.5f), PosEnemy);
+        //GM.SpawnEnemySlider(enemyPos + new Vector2(0, 0.5f), PosEnemy);
         GameObject Damage = Instantiate(DamageUI, enemyPos + new Vector2(0.8f, -0.3f), Quaternion.identity, canvasPos);
         TextMeshProUGUI DamageText = Damage.GetComponent<TextMeshProUGUI>();
         DamageText.text = "25";

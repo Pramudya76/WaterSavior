@@ -15,10 +15,13 @@ public class EnemyStatus : MonoBehaviour
     private SpriteRenderer SpriteRenderer;
     private float dissolveAmount = 0;
     private TurnManager TM;
+    private GameManager GM;
+    private bool haveSlider = false;
     // Start is called before the first frame update
     void Start()
     {
         TM = GameObject.FindWithTag("TurnManager").GetComponent<TurnManager>();
+        GM = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         SpriteRenderer = GetComponent<SpriteRenderer>();
         if (data != null)
         {
@@ -36,6 +39,13 @@ public class EnemyStatus : MonoBehaviour
         {
             StartCoroutine(CDBeforeDie());
         }
+
+        if (CurrentHealth < 50 && !haveSlider)
+        {
+            haveSlider = true;
+            GM.SpawnEnemySlider(transform.position + new Vector3(0, 0.5f, 0), transform);
+        }
+        
     }
 
     public void EnemyHealth(float value)
