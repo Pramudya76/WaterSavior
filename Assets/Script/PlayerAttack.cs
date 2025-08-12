@@ -49,7 +49,7 @@ public class PlayerAttack : MonoBehaviour
             if (hit.collider != null && hit.collider.CompareTag("Enemy"))
             {
                 Cursor.SetCursor(ClickCursor, Vector2.zero, CursorMode.Auto);
-                if (Input.GetMouseButtonDown(0) && isPlayerTurn && !isTurn)
+                if (Input.GetMouseButtonDown(0) && isPlayerTurn && !isTurn && GM.isBasicAttack)
                 {
                 GameObject enemyTarget = hit.collider.gameObject;
                 PosEnemy = hit.collider.transform;
@@ -98,6 +98,7 @@ public class PlayerAttack : MonoBehaviour
         animator.SetFloat("yvelocity", 0);
         isPlayerTurn = false;
         isTurn = false;
+        GM.isBasicAttack = false;
     }
 
     IEnumerator CDBeforeDie()

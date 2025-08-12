@@ -10,6 +10,7 @@ public class TurnManager : MonoBehaviour
     private bool isNow = false;
     private bool turnProgress = false;
     private GameManager GM;
+    public GameObject UISkill;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +30,7 @@ public class TurnManager : MonoBehaviour
                 allUnits.Add(Enemy);
             }
         }
+        UISkill.gameObject.SetActive(false);
 
     }
 
@@ -80,12 +82,14 @@ public class TurnManager : MonoBehaviour
             var unit = turnQueue.Dequeue();
             if (unit is PlayerAttack Player)
             {
+                UISkill.gameObject.SetActive(true);
                 GM.turn = "Player";
                 Player.isPlayerTurn = true;
                 yield return new WaitUntil(() => Player.isPlayerTurn == false);
             }
             else if (unit is EnemyStatus Enemy)
             {
+                UISkill.gameObject.SetActive(false);
                 if (Enemy == null) continue;
                 EnemyAttack EA = Enemy.GetComponent<EnemyAttack>();
                 if (EA != null)

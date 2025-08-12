@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -31,6 +32,10 @@ public class GameManager : MonoBehaviour
     private int index = 0;
     public bool isDie = false;
     public Animator animator;
+    public GameObject FireballPrefabs;
+    public Transform FireballSpawn;
+    public bool isBasicAttack = false;
+    public PlayableDirector Ultimate;
     // Start is called before the first frame update
     void Start()
     {
@@ -180,13 +185,55 @@ public class GameManager : MonoBehaviour
             image.sprite = null;
         }
     }
-    
+
     IEnumerator CDFadePanel(float duration, String nameScene)
     {
         animator.SetTrigger("FinishScene");
         yield return new WaitForSeconds(duration);
         SceneManager.LoadScene(nameScene);
     }
+
+    public void CallBasicAttack()
+    {
+        isBasicAttack = true;
+    }
+
+    public void CallHealing()
+    {
+        PA.health += 30f;
+    }
+
+    public void CallUltimate()
+    {
+        Ultimate.time = 0;
+        Ultimate.Play();
+    }
+
+    public void SpawnFireball()
+    {
+        foreach (var enemies in TM.allUnits)
+        {
+            GameObject Ultimate = Instantiate(FireballPrefabs, FireballSpawn.position, Quaternion.identity);
+
+            Rigidbody2D Fireball = Ultimate.GetComponent<Rigidbody2D>();
+
+            Vector3 arah = enemies.transform.position - Ultimate.transform.position;
+            float angle = Mathf.Atan2(arah.y, arah.x) * Mathf.Rad2Deg;
+
+            Ultimate.transform.rotation = Quaternion.Euler(0, 0, angle);
+
+            Fireball.velocity = arah.normalized * 5f;
+        }
+    }
+
+    
+    // private void OnUltimateFinished(PlayableDirector director)
+    // {
+    //     if (director == Ultimate)
+    //     {
+    //         isUltimate = false;
+    //     }
+    // }
 
 
 }
