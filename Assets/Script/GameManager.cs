@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     public Transform FireballSpawn;
     public bool isBasicAttack = false;
     public PlayableDirector Ultimate;
+    public ParticleSystem healingEffect;
     // Start is called before the first frame update
     void Start()
     {
@@ -91,7 +92,7 @@ public class GameManager : MonoBehaviour
         Slider EnemySlider = sliderEnemy.GetComponent<Slider>();
 
         enemySlider.setSlider(ES);
-        EnemySlider.maxValue = ES.CurrentHealth;
+        EnemySlider.maxValue = ES.data.maxHealth;
 
         enemySlider.enemyPos = TargetPos;
         handler.gameObject.SetActive(false);
@@ -200,7 +201,19 @@ public class GameManager : MonoBehaviour
 
     public void CallHealing()
     {
+        StartCoroutine(CDHealing());
+    }
+
+    IEnumerator CDHealing()
+    {
+        healingEffect.Play();
         PA.health += 30f;
+        if (PA.health > 200)
+        {
+            PA.health = 200;
+        }
+        yield return new WaitUntil(() => healingEffect.isPlaying);
+        healingEffect.Stop();
         PA.isPlayerTurn = false;
     }
 

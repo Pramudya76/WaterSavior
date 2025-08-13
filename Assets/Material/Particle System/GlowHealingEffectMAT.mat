@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5566064616069484653
+--- !u!114 &-848940296662099500
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FireballCoreMAT
-  m_Shader: {fileID: -6465566751694194690, guid: 72d6e0b8e6b27b84da1f7e5f793e9ebf, type: 3}
+  m_Name: GlowHealingEffectMAT
+  m_Shader: {fileID: -6465566751694194690, guid: 6eab5b49114b1644ea76b90b41211148, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -37,7 +37,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 25cbdb3cf5ec9d949a43e7bcf487df3a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -55,6 +55,6 @@ Material:
     m_Ints: []
     m_Floats: []
     m_Colors:
-    - _GlowColor: {r: 5.992157, g: 0.5087672, b: 5.2686534, a: 0}
+    - _ColorGlowHealing: {r: 1.7634732, g: 14.389936, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
