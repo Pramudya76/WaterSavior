@@ -228,6 +228,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (var enemies in TM.allUnits)
         {
+            if (enemies.tag == "Player") continue;
             GameObject Ultimate = Instantiate(FireballPrefabs, FireballSpawn.position, Quaternion.identity);
 
             Rigidbody2D Fireball = Ultimate.GetComponent<Rigidbody2D>();
@@ -243,6 +244,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator CDUltimate()
     {
+        TM.UISkill.gameObject.SetActive(false);
         yield return new WaitForSeconds(4f);
         PA.isPlayerTurn = false;
     }
