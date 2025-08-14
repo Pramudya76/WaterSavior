@@ -29,12 +29,14 @@ public class PlayerAttack : MonoBehaviour
     public bool isTurn = false;
     public Texture2D DefaultCursor;
     public Texture2D ClickCursor;
+    private TurnManager TM;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         GM = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         AM = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
+        TM = GameObject.FindWithTag("TurnManager").GetComponent<TurnManager>();
         originalPos = transform.position;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -77,6 +79,7 @@ public class PlayerAttack : MonoBehaviour
 
     IEnumerator MoveToEnemyandBack(Vector2 enemyPos, EnemyStatus enemyStatus)
     {
+        TM.UISkill.gameObject.SetActive(false);
         isPlayerTurn = true;
         isTurn = true;
         animator.SetFloat("xvelocity", 1);
